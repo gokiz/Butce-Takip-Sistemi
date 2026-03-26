@@ -6,3 +6,5 @@ target/
 *.db
 .vscode/
 bin/
+Budget_Report.xlsx
+*.xlsx
