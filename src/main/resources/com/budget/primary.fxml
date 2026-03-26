@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+<?import java.lang.Double?> <VBox alignment="TOP_CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.budget.PrimaryController" style="-fx-background-color: #f4f7f6;">
+    <children>
+        <HBox alignment="CENTER" style="-fx-background-color: #2c3e50; -fx-padding: 15px; -fx-background-radius: 0 0 15 15;">
+            <children>
+                <Label text="💰 Personal Budget Tracker" textFill="white">
+                    <font>
+                        <Font name="System Bold" size="26.0" />
+                    </font>
+                </Label>
+            </children>
+        </HBox>
+        
+        <VBox spacing="15" style="-fx-background-color: white; -fx-padding: 20px; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);">
+            <children>
+                <Label text="Add New Expense" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #34495e;" />
+                <GridPane hgap="15" vgap="10">
+                    <children>
+                        <Label text="Title:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                        <TextField fx:id="titleField" promptText="e.g. Electricity Bill" GridPane.columnIndex="1" GridPane.rowIndex="0" HBox.hgrow="ALWAYS" />
+                        
+                        <Label text="Amount (TL):" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                        <TextField fx:id="amountField" promptText="e.g. 750" GridPane.columnIndex="1" GridPane.rowIndex="1" HBox.hgrow="ALWAYS" />
+                    </children>
+                </GridPane>
+                <HBox alignment="CENTER_RIGHT" spacing="10">
+                    <children>
+                        <Button text="Update Selected" onAction="#updateExpense" style="-fx-background-color: #f39c12; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10 20; -fx-background-radius: 5; -fx-cursor: hand;" />
+                        <Button text="➕ Add Expense" onAction="#addExpense" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10 20; -fx-background-radius: 5; -fx-cursor: hand;" />
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+
+        <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-background-color: #ecf0f1; -fx-padding: 10px; -fx-background-radius: 5;">
+            <children>
+                <Label text="Monthly Filter:" style="-fx-font-weight: bold;" />
+        <ComboBox fx:id="monthSelector" promptText="Select Month" prefWidth="120" />
+        <Button text="📅 Show Monthly" onAction="#showMonthlyExpenses" style="-fx-background-color: #8e44ad; -fx-text-fill: white; -fx-cursor: hand;" />
+                <Label text="Filter Limit (TL):" style="-fx-font-weight: bold;" />
+                <TextField fx:id="filterField" promptText="Enter limit..." prefWidth="100" />
+                <Button text="🔍 Filter Above" onAction="#filterExpenses" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-cursor: hand; -fx-background-radius: 5;" />
+                <Button text="🔄 Reset" onAction="#loadData" style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-cursor: hand; -fx-background-radius: 5;" />
+            </children>
+        </HBox>
+
+        <VBox VBox.vgrow="ALWAYS" spacing="10" style="-fx-background-color: white; -fx-padding: 20px; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);">
+            <children>
+                <Label text="Expense Records" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #34495e;" />
+                <TableView fx:id="expenseTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colId" text="ID" prefWidth="60" />
+                        <TableColumn fx:id="colTitle" text="Title" prefWidth="280" />
+                        <TableColumn fx:id="colAmount" text="Amount" prefWidth="150" style="-fx-alignment: CENTER-RIGHT;" />
+                    </columns>
+                    <placeholder>
+                        <Label text="No records found." />
+                    </placeholder>
+                </TableView>
+            </children>
+        </VBox>
+
+        <HBox alignment="CENTER_RIGHT" style="-fx-background-color: white; -fx-padding: 15px; -fx-background-radius: 10;">
+            <children>
+                <Label fx:id="totalLabel" text="Total: 0,00 TL" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #e67e22;" HBox.hgrow="ALWAYS">
+                    <maxWidth><Double fx:constant="MAX_VALUE" /></maxWidth>
+                </Label>
+                <HBox spacing="10" alignment="CENTER_RIGHT">
+                    <children>
+                        <Button text="📥 Export Excel" onAction="#exportToExcel" style="-fx-background-color: #2980b9; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10 20; -fx-background-radius: 5; -fx-cursor: hand;" />
+                        <Button text="🗑️ Delete Selected" onAction="#deleteExpense" style="-fx-background-color: #c0392b; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10 20; -fx-background-radius: 5; -fx-cursor: hand;" />
+                    </children>
+                </HBox>
+            </children>
+        </HBox>
+    </children>
+
+    <padding>
+        <Insets bottom="25.0" left="25.0" right="25.0" top="0.0" />
+    </padding>
+</VBox>
